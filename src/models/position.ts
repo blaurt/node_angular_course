@@ -1,22 +1,32 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
+
+interface IPosition {
+  name: string;
+  const: number;
+  categoryId: string;
+  userId: string;
+}
 
 const positionSchema: mongoose.Schema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    cost: {
-        type: Number,
-        required: true
-    },
-    category:{
-        ref: 'categories',
-        type: mongoose.Schema.Types.ObjectId
-    },
-    user:{
-        ref: 'users',
-        type: mongoose.Schema.Types.ObjectId
-    }
-})
+  name: {
+    type: String,
+    required: true
+  },
+  cost: {
+    type: Number,
+    required: true
+  },
+  categoryId: {
+    ref: "categories",
+    type: mongoose.Schema.Types.ObjectId
+  },
+  userId: {
+    ref: "users",
+    type: mongoose.Schema.Types.ObjectId
+  }
+});
 
-export default mongoose.model('positions', positionSchema)
+export const Position = mongoose.model<IPosition & mongoose.Document>(
+  "positions",
+  positionSchema
+);
