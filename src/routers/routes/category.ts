@@ -6,12 +6,15 @@ import {
   deleteCategoryById,
   updateCategory
 } from "../../controllers/category";
+import upload from "../../middlewares/upload";
+
+
 
 const categoryRouter: express.Router = express.Router();
 
 categoryRouter.get("/", getCategoryList);
 categoryRouter.get("/:id", getCategoryByid);
-categoryRouter.post("/", createCategory);
+categoryRouter.post("/",upload.single('image'), createCategory);
 categoryRouter.put("/:id", updateCategory);
 categoryRouter.delete("/:id", deleteCategoryById);
 

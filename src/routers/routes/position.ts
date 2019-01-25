@@ -1,6 +1,6 @@
 import * as express from "express";
 import {
-  getPositionByCategory,
+  getPositionByCategoryId,
   createPosition,
   updatePosition,
   deletePositionById
@@ -8,7 +8,7 @@ import {
 
 const positionRouter: express.Router = express.Router();
 
-positionRouter.get("/:id", getPositionByCategory);
+positionRouter.get("/:categoryId", getPositionByCategoryId);
 positionRouter.post("/", createPosition);
 positionRouter.put("/:id", updatePosition);
 positionRouter.delete("/:id", deletePositionById);

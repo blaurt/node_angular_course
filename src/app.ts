@@ -1,11 +1,12 @@
 import * as express from "express";
 
 import baseRouter from "./routers";
-import { getAppInstance } from "./core/app";
-import { getConfig, IAppSettings } from "./config/main";
+import { getAppInstance } from "./core/server";
+import { initConfig, IAppSettings } from "./config/main";
 
-const { port }: IAppSettings = getConfig();
+const { port }: IAppSettings = initConfig();
 const app: express.Application = getAppInstance();
+app.use('/uploads', express.static('uploads'))
 app.use(baseRouter);
 
 app.listen(port, () =>
