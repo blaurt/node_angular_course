@@ -13,7 +13,7 @@ async function _attachCoreMiddlewares(app: express.Application) {
 
   app.use(morgan(process.env.ENV));
   app.use(passport.initialize());
-  useJwt(passport);
+  useJwt(passport); 
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());

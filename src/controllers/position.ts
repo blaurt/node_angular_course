@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Position } from "../models/position";
+import { Position, IPosition } from "../models/position";
 import { Document } from "mongoose";
 
 export async function getPositionByCategoryId(
@@ -17,19 +17,37 @@ export async function createPosition(
   req: Request,
   res: Response
 ): Promise<Response> {
-  return res.send({ login: true });
+  const { name, cost, categoryId } = req.body;
+  const { id: userId } = req.user;
+  const newPosition: IPosition = new Position({
+    name,
+    cost,
+    categoryId,
+    userId
+  });
+  await newPosition.save();
+
+  return res.send(newPosition);
 }
 
 export async function updatePosition(
   req: Request,
   res: Response
 ): Promise<Response> {
-  return res.send({ login: true });
+  const { id } = req.params;
+  const position = await Position.findOneAndUpdate(
+    { _id: id },
+    { $set: req.body },
+    { new: true }
+  );
+  return res.send(position);
 }
 
 export async function deletePositionById(
   req: Request,
   res: Response
 ): Promise<Response> {
-  return res.send({ login: true });
+  const { id } = req.params;
+  await Position.deleteOne({ _id: id });
+  return res.status(204).send();
 }

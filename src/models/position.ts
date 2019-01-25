@@ -1,6 +1,6 @@
 import * as mongoose from "mongoose";
 
-interface IPosition {
+export interface IPosition extends mongoose.Document {
   name: string;
   const: number;
   categoryId: string;
@@ -26,7 +26,10 @@ const positionSchema: mongoose.Schema = new mongoose.Schema({
   }
 });
 
-export const Position = mongoose.model<IPosition & mongoose.Document>(
-  "positions",
-  positionSchema
-);
+export const Position = mongoose.model<IPosition>("positions", positionSchema);
+
+positionSchema.methods.findByCondition = async function(condition: any) {
+  const position = await Position.find(condition);
+
+  return position;
+};

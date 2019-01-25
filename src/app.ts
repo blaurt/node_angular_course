@@ -6,6 +6,7 @@ import { initConfig, IAppSettings } from "./config/main";
 
 const { port }: IAppSettings = initConfig();
 const app: express.Application = getAppInstance();
+app.use('/uploads', express.static('uploads'))
 app.use(baseRouter);
 
 app.listen(port, () =>

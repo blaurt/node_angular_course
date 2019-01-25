@@ -1,5 +1,16 @@
 import * as mongoose from "mongoose";
 
+interface IListItem {
+  name: string;
+  quantity: number;
+}
+export interface IOrder extends mongoose.Document {
+  date: number;
+  order: number;
+  list: [IListItem];
+  userId: string;
+}
+
 const orderSchema: mongoose.Schema = new mongoose.Schema({
   date: {
     type: Date,
@@ -22,10 +33,10 @@ const orderSchema: mongoose.Schema = new mongoose.Schema({
       }
     }
   ],
-  user: {
+  userId: {
     ref: "users",
     type: mongoose.Schema.Types.ObjectId
   }
 });
 
-export default mongoose.model("orders", orderSchema);
+export const Order = mongoose.model<IOrder>("orders", orderSchema);

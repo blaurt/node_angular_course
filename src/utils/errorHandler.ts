@@ -1,3 +1,4 @@
-function errorHandler(err, res){
-    res.status(500)
+export function errorHandler(err, res) {
+  console.error(err);
+  res.status(500);
 }
