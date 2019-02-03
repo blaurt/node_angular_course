@@ -7,8 +7,8 @@ export async function getPositionByCategoryId(
   res: Response
 ): Promise<Response> {
   const { categoryId } = req.params;
-  const { id: userId } = req.user.id;
-
+  const { id: userId } = req.user;
+  console.log("userId", userId);
   const positions: Document[] = await Position.find({ categoryId, userId });
   return res.send(positions);
 }

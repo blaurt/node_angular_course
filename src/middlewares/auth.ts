@@ -19,7 +19,7 @@ export const useJwt = (passportObj: typeof passport) => {
         }
         verify(null, user);
       } catch (e) {
-        console.error(e);
+        // console.error(e);
       }
     })
   );

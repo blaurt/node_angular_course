@@ -1,0 +1,8 @@
+.loader {
+  display: none;
+  margin-left: 250px;
+
+  &.visible {
+    display: block;
+  }
+}

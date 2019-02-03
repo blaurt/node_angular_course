@@ -13,15 +13,14 @@ async function _attachCoreMiddlewares(app: express.Application) {
 
   app.use(morgan(process.env.ENV));
   app.use(passport.initialize());
-  useJwt(passport); 
+  useJwt(passport);
   app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   try {
-    await mongoose.connect(
-      config.dbConnectionString,
-      { useNewUrlParser: true }
-    );
+    await mongoose.connect(config.dbConnectionString, {
+      useNewUrlParser: true
+    });
   } catch (e) {
     // TODO implement DbCOnnectionError
     console.error("Can not connect to MongoDB", e);

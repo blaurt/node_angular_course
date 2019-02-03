@@ -17,17 +17,17 @@ apiRouter.use(
   analyticsRouter
 );
 apiRouter.use(
-  "/order",
+  "/orders",
   passport.authenticate("jwt", { session: false }),
   orderRouter
 );
 apiRouter.use(
-  "/position",
+  "/positions",
   passport.authenticate("jwt", { session: false }),
   positionRouter
 );
 apiRouter.use(
-  "/category",
+  "/categories",
   passport.authenticate("jwt", { session: false }),
   categoryRouter
 );
