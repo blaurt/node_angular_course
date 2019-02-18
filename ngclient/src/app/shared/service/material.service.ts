@@ -25,4 +25,8 @@ export class MaterialService {
   static updateTextInputs(): void {
     M.updateTextFields();
   }
+
+  static initTooltip(ref: ElementRef): ModalInstance {
+    return M.Tooltip.init(ref.nativeElement);
+  }
 }
