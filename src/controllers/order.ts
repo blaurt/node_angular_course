@@ -4,6 +4,8 @@ import { Order, IOrder } from "../models/order";
 export async function getOrder(req: Request, res: Response): Promise<Response> {
   const { id: userId } = req.user;
   const { offset, limit } = req.query;
+  console.log("{ offset, limit }", { offset, limit });
+
   const query = { userId } as any;
   if (req.query.start) {
     query.date = {
@@ -24,7 +26,11 @@ export async function getOrder(req: Request, res: Response): Promise<Response> {
     query.order = +req.query.order;
   }
 
-  const orders = await Order.find(query, null, { date: -1, offset, limit });
+  const orders = await Order.find(query, null, {
+    date: -1,
+    skip: parseInt(offset),
+    limit: parseInt(limit)
+  });
   return res.send(orders);
 }
 

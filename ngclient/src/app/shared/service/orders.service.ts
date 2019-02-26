@@ -2,7 +2,15 @@ import { Injectable } from "@angular/core";
 import { Order } from "../interfaces/order";
 import { Observable } from "rxjs";
 import { Message } from "../interfaces/message";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
+
+interface fromObjectParams {
+  [param: string]: string | string[];
+}
+interface fetchParams extends fromObjectParams {
+  limit?: string;
+  offset?: string;
+}
 
 @Injectable({
   providedIn: "root"
@@ -10,8 +18,10 @@ import { HttpClient } from "@angular/common/http";
 export class OrdersService {
   constructor(private http: HttpClient) {}
 
-  fetch(): Observable<Order[]> {
-    return this.http.get<Order[]>("/api/orders");
+  fetch(params: fetchParams): Observable<Order[]> {
+    return this.http.get<Order[]>("/api/orders", {
+      params: new HttpParams({ fromObject: params })
+    });
   }
 
   getById(id: string): Observable<Order> {
@@ -19,9 +29,7 @@ export class OrdersService {
   }
 
   create(order: Order): Observable<Order> {
-    const body = new FormData();
-    body.append("name", name);
-    return this.http.post<Order>(`/api/orders`, body);
+    return this.http.post<Order>(`/api/orders`, order);
   }
 
   update(id: string, name: string, image?: File): Observable<Order> {
