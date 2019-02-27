@@ -13,8 +13,9 @@ import {
 import { OrdersService } from "../shared/service/orders.service";
 import { Order } from "../shared/interfaces/order";
 import { LoaderComponent } from "../shared/components/loader/loader.component";
+import { Filter } from "../shared/interfaces/filter";
 
-export const STEP = 1;
+export const STEP = 2;
 
 @Component({
   selector: "app-history-page",
@@ -29,6 +30,7 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   public loading: boolean = false;
   public noMoreOrders: boolean = false;
   public tooltip: ModalInstance = null;
+  public filter: Filter = {};
 
   @ViewChild("tooltip") tooltipRef: ElementRef;
   constructor(private ordersService: OrdersService) {}
@@ -48,7 +50,10 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
   private async fetch() {
     this.loading = true;
     const { offset, limit } = this;
-    const params = { offset: offset.toString(), limit: limit.toString() };
+    const params = Object.assign({}, this.filter, {
+      offset: offset.toString(),
+      limit: limit.toString()
+    });
     try {
       LoaderComponent.showPreloader();
       return await this.ordersService.fetch(params).toPromise();
@@ -67,5 +72,17 @@ export class HistoryPageComponent implements OnInit, OnDestroy, AfterViewInit {
       this.noMoreOrders = true;
     }
     this.orders.push(...orders);
+  }
+
+  async applyFilter(filter: Filter) {
+    this.filter = filter;
+    this.orders = [];
+    this.offset = 0;
+    this.loading = true;
+    this.orders = await this.fetch();
+  }
+
+  isFiltered() {
+    return !!Object.keys(this.filter).length;
   }
 }

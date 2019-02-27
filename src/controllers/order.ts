@@ -4,7 +4,6 @@ import { Order, IOrder } from "../models/order";
 export async function getOrder(req: Request, res: Response): Promise<Response> {
   const { id: userId } = req.user;
   const { offset, limit } = req.query;
-  console.log("{ offset, limit }", { offset, limit });
 
   const query = { userId } as any;
   if (req.query.start) {
@@ -25,6 +24,7 @@ export async function getOrder(req: Request, res: Response): Promise<Response> {
   if (req.query.order) {
     query.order = +req.query.order;
   }
+  console.log("query", query);
 
   const orders = await Order.find(query, null, {
     date: -1,

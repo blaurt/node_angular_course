@@ -9,6 +9,10 @@ export interface ModalInstance {
   destroy?(): void;
 }
 
+export interface MaterialDatePicker extends ModalInstance {
+  date?: Date;
+}
+
 @Injectable()
 export class MaterialService {
   static initModal(modalRef: ElementRef): ModalInstance {
@@ -28,5 +32,16 @@ export class MaterialService {
 
   static initTooltip(ref: ElementRef): ModalInstance {
     return M.Tooltip.init(ref.nativeElement);
+  }
+
+  static initDatePicker(
+    ref: ElementRef,
+    onClose: () => void
+  ): MaterialDatePicker {
+    return M.Datepicker.init(ref.nativeElement, {
+      format: "dd.mm.yyyy",
+      showClearBtn: true,
+      onClose
+    });
   }
 }
