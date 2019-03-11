@@ -1,3 +1,75 @@
-<p>
-  overview-page works!
-</p>
+<div class="page-title">
+  <h4>
+    Yesterday overview ({{ yesterdayDate | date: "dd.MM.yyyy" }})
+    <i
+      class="material-icons black-text pointer"
+      id="dashboard-info"
+      (click)="onOpenInfo()"
+      >info_outline</i
+    >
+  </h4>
+</div>
+
+<div class="row" *ngIf="overview">
+  <div class="col s12 l6">
+    <div class="card light-blue lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Revenue:</span>
+        <h3>{{ overview.gain.yesterday }}</h3>
+        <h3
+          class="text-darken-2 m0 mb1"
+          [ngClass]="{
+            'green-text text-darken-2': overview.gain.isHigher,
+            'red-text': overview.gain.isHigher
+          }"
+        >
+          <i class="material-icons"
+            >{{ overview.gain.isHigher ? "arrow_upward" : "arrow_downward" }}
+          </i>
+          {{ overview.gain.percent }}%
+        </h3>
+        <p>
+          Your business` revenue was {{ overview.gain.percent }} %
+          {{ overview.gain.isHigher ? "higher" : "lower" }} than average:
+          {{ overview.gain.compare }} usd per day.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 l6">
+    <div class="card orange lighten-2 white-text">
+      <div class="card-content">
+        <span class="card-title">Orders:</span>
+        <h3>{{ overview.orders.yesterday }} orders</h3>
+        <h3
+          class="  m0 mb1"
+          [ngClass]="{
+            'green-text text-darken-2': overview.gain.isHigher,
+            'red-text': overview.gain.isHigher
+          }"
+        >
+          <i class="material-icons"
+            >{{ overview.gain.isHigher ? "arrow_upward" : "arrow_downward" }}
+          </i>
+          {{ overview.orders.percent }}%
+        </h3>
+        <p>
+          Number of orders yesterday was {{ overview.gain.percent }}%
+          {{ overview.gain.isHigher ? "higher" : "lower" }} than average:
+          {{ overview.orders.compare }} orders per day.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tap-target" data-target="menu" #tapTarget>
+  <div class="tap-target-content">
+    <h5>Зачем нужна эта страница?</h5>
+    <p>
+      Страница “Обзор” покажет динамику продаж за предыдущий день. Сравнение со
+      средним значениями поможет вам понять, как идут дела у Вашего бизнеса.
+    </p>
+  </div>
+</div>

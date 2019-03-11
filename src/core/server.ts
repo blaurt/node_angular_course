@@ -11,7 +11,7 @@ import { useJwt } from "../middlewares/auth";
 async function _attachCoreMiddlewares(app: express.Application) {
   const config: IAppSettings = initConfig();
 
-  app.use(morgan(process.env.ENV));
+  app.use(morgan(process.env.NODE_ENV));
   app.use(passport.initialize());
   useJwt(passport);
   app.use(cors());

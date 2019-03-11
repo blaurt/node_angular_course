@@ -1,13 +1,14 @@
 import * as mongoose from "mongoose";
 
-interface IListItem {
+export interface IListItem {
   name: string;
   quantity: number;
+  cost: number;
 }
 export interface IOrder extends mongoose.Document {
   date: number;
   order: number;
-  list: [IListItem];
+  list: IListItem[];
   userId: string;
 }
 
