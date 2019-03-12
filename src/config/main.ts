@@ -1,5 +1,3 @@
-import { prototype } from "stream";
-
 export interface IAppSettings {
   port: number;
   dbConnectionString: string;
