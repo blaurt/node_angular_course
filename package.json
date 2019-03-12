@@ -8,7 +8,7 @@
     "npm": "6.7.0"
   },
   "scripts": {
-    "start": "ts-node --inspect=5858 index.ts",
+    "start": "node build/index.js",
     "ngclient-install": "npm i --prefix ngclient",
     "client": "npm run start --prefix ngclient",
     "dev": "concurrently \"nodemon\" \"npm run client\" ",

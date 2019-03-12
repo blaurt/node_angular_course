@@ -11,7 +11,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(baseRouter);
 
 if (["prod", "production"].includes) {
-  const publicFolderPath = path.resolve(__dirname, "/ngclient/dist/ngclient");
+  const publicFolderPath = path.resolve(__dirname, "../ngclient/dist/ngclient");
   console.log("publicFolderPath", publicFolderPath);
 
   app.use(express.static(publicFolderPath));
