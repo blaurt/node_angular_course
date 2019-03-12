@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
+  "engines": {
+    "node": "11.10.0",
+    "npm": "6.7.0"
+  },
   "scripts": {
     "start": "ts-node --inspect=5858 index.ts",
     "ngclient-install": "npm i --prefix ngclient",
     "client": "npm run start --prefix ngclient",
-    "dev": "concurrently \"nodemon\" \"npm run client\" "
+    "dev": "concurrently \"nodemon\" \"npm run client\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run build --prefix ngclient"
   },
   "author": "",
   "license": "ISC",

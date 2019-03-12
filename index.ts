@@ -4,7 +4,4 @@ import { initConfig } from "./src/config/main";
 dotenv.config();
 initConfig();
 import "./src/app";
-
-// app.get("/", (req: express.Request, res: express.Response) => {
-//   res.send("index route");
-// });
+console.log("env", process.env.DB_URL);

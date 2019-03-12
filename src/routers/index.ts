@@ -5,8 +5,4 @@ const baseRouter: express.Router = express.Router();
 
 baseRouter.use("/api", apiRouter);
 
- if(['prod','production'].includes){
-
-}
-
 export default baseRouter;
